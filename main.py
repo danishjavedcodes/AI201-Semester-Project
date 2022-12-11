@@ -59,7 +59,7 @@ def bacgroundremover():
     return render_template("background_page.html",filename="output.png")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')
  
 
 
