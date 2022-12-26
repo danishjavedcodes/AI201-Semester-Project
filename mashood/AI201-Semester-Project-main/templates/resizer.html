@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/dist/output.css')}}">
+    <title>Resize Image</title>
+    <style>
+  .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+
+
+
+.btn {
+  border: 2px;
+  color: white;
+  background-color: #000000;
+  padding: 8px 20px;
+  border-radius: 8px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+    </style>
+</head>
+<body>
+  <section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+    {% if filename == "img.jpg" %}
+            <img style = "border-radius: 5%; filter: drop-shadow(0 0 0.75rem rgb(63, 81, 181))" class="lg:w-1/2 w-full lg:h-auto h-64 filter: drop-shadow(0 0 2.75rem indigo) object-cover object-center rounded" src="{{ url_for('static', filename='/Images/'+filename) }}">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+              <h2 class="text-sm title-font text-gray-500 tracking-widest">AI powered</h2>
+              <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">Image resizer</h1>
+              <div style="padding-top: 5px; margin-top: 5px;">
+                <form action = "/resize_img" method = 'POST'>
+                  <br><label for "Height">Height</label>
+                  <br> <input type="text" id = "Height" name="Height">
+                  <br><label for "Width">Width</label>
+                  <br> <input type="text" id = "Width" name="Width">
+                  <input style="background-color: #000000; color: white; border-radius: 8px; padding: 8px 20px;" type="submit" value="submit" href="{{url_for("resize_img")}}">
+                  <!-- <a style="background-color: #000000; color: white; border-radius: 8px; padding: 8px 20px;;" href="{{url_for("resize_img")}}">Resize image</a> -->
+               </form>
+               <br>
+                
+                
+              </div>
+            </div>
+    {% elif filename ==  "output.png" %}
+            <img class="lg:w-1/2 w-full lg:h-auto h-64 filter: drop-shadow(0 0 2.75rem indigo) object-cover object-center rounded" src="{{ url_for('static', filename='/Images/'+filename) }}">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+              <h2 class="text-sm title-font text-gray-500 tracking-widest">AI powered</h2>
+              <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">Image resizer</h1>
+              <div>
+                <button style="background-color: #000000; color: white; border-radius: 8px; padding: 8px 20px;">Download</button>
+              </div>
+            </div>
+      {% else %}
+      <img style = "border-radius: 5%; filter: drop-shadow(0 0 0.75rem rgb(63, 81, 181))"class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded filter: " src="{{ url_for('static', filename='/Images/upload.png')}}">
+      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">AI powered</h2>
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">Image resizer</h1>
+        <p class="leading-relaxed">Upload image to RESIZE.</p>
+        <div>
+          <form method="post" action = "/upload_image_resizer" enctype="multipart/form-data">
+          <div class="upload-btn-wrapper">
+            <button class="btn">Select Image</button>
+            <input class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" type="file" name="file" autocomplete="off" required/>
+          </div>
+          <div>
+            <button style="background-color: #000000; color: white; border-radius: 8px; padding: 8px 20px;" input type = "Submit" value="Submit">Upload</button>
+          </div>
+        </div>
+        
+       
+        {% endif %}
+    </div>
+  </div>
+  </section>
+</body>
+</html> 
+
+
+
+
+
