@@ -1,0 +1,1 @@
+/Users/u2021605/Desktop/Python Flask/static/images

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Choose Filters</title>
+    <style>
+  .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+
+.btn {
+  border: 2px;
+  color: white;
+  background-color: #667EEA;
+  padding: 8px 20px;
+  border-radius: 8px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+    </style>
+</head>
+<body>
+  <section class="text-gray-600 body-font overflow-hidden">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+    {% if filename == "img.jpg" %}
+            <img style = "border-radius: 5%; filter: drop-shadow(0 0 0.75rem rgb(63, 81, 181))" class="lg:w-1/2 w-full lg:h-auto h-64 filter: drop-shadow(0 0 2.75rem indigo) object-cover object-center rounded" src="{{ url_for('static', filename='/Images/'+filename) }}">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+              <h2 class="text-sm title-font text-gray-500 tracking-widest">Power Of Numpy, Matplotlib and Kernel</h2>
+              <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">Choose From Below</h1>
+              <div style="padding-top: 5px; margin-top: 5px;">
+                <a style="background-color: #667EEA; color: white; border-radius: 8px; padding: 8px 20px;" href="{{url_for("Emboss")}}" >Emboss</a>
+                <a style="background-color: #667EEA; color: white; border-radius: 8px; padding: 8px 20px;" href="{{url_for("Sharpen")}}">Sharpen</a>
+                <a style="background-color: #667EEA; color: white; border-radius: 8px; padding: 8px 20px;" href="{{url_for("Sepia")}}">Sepia</a>
+                <a style="background-color: #667EEA; color: white; border-radius: 8px; padding: 8px 20px;" href="{{url_for("Blur")}}">Blur</a>
+              </div>
+            </div>
+    {% elif filename ==  "output.png" %}
+            <img class="lg:w-1/2 w-full lg:h-auto h-64 filter: drop-shadow(0 0 2.75rem indigo) object-cover object-center rounded" src="{{ url_for('static', filename='/Images/'+filename) }}">
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+              <h2 class="text-sm title-font text-gray-500 tracking-widest"></h2>
+              <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">BE SURE TO USE AGAIN!</h1>
+              <div>
+                <button style="background-color: #667EEA; color: white; border-radius: 8px; padding: 8px 20px;">DOWNLOAD</button>
+              </div>
+            </div>
+      {% else %}
+      <img style = "border-radius: 5%; filter: drop-shadow(0 0 0.75rem rgb(63, 81, 181))"class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded filter: " src="{{ url_for('static', filename='/Images/upload.png')}}">
+      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">AI POWERED</h2>
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">FILTERS</h1>
+        <p class="leading-relaxed">UPLOAD YOUR IMAGE TO APPLY FILTERS</p>
+        <div>
+          <form method="post" action = "/upload" enctype="multipart/form-data">
+          <div class="upload-btn-wrapper">
+            <button class="btn">SELECT IMAGE</button>
+            <input class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" type="file" name="file" autocomplete="off" required/>
+          </div>
+          <div>
+            <button style="background-color: #667EEA; color: white; border-radius: 8px; padding: 8px 20px;" input type = "submit" value="submit">UPLOAD</button>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+  </div>
+  </section>
+</body>
+</html> 
+
